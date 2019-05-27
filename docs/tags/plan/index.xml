@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>plan on DTU Field Robot Event 2019</title>
+    <link>https://dimidagd.github.io/FRE2019log/tags/plan/</link>
+    <description>Recent content in plan on DTU Field Robot Event 2019</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 07 May 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://dimidagd.github.io/FRE2019log/tags/plan/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>plan</title>
+      <link>https://dimidagd.github.io/FRE2019log/posts/plan/</link>
+      <pubDate>Tue, 07 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://dimidagd.github.io/FRE2019log/posts/plan/</guid>
+      <description> Brief planning Task1-Task2 outdoor tests recovery system turning tuning moving backwards  Task3 Mapping Obstacle avoidance + Trajectory planning, adapt graphplanner. Possible to ignore rocks? C.V: parameters tuning, outdoor tests, different lighting conditions  Task4 Sprayer from 2017 exists Implement in 2018 system  Week1: Task1 tests Task2 tests C.V. tuning Moving backwards  Week2: Develop mapping Path planning Outdoor testing on rock skipping  Week3: Sprayer mounting + simple testing Outdoor mapping Spraying tests  Week4: Catch up on everything Exhaustive testing  </description>
+    </item>
+    
+  </channel>
+</rss>
