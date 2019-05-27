@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on DTU Field Robot Event 2019</title>
+    <link>https://dimidagd.github.io/FRE2019log/posts/</link>
+    <description>Recent content in Posts on DTU Field Robot Event 2019</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 07 May 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://dimidagd.github.io/FRE2019log/posts/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>MD cheatsheet</title>
+      <link>https://dimidagd.github.io/FRE2019log/posts/cheatsheet_md/</link>
+      <pubDate>Tue, 07 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://dimidagd.github.io/FRE2019log/posts/cheatsheet_md/</guid>
+      <description>MD cheatsheet https://en.support.wordpress.com/markdown-quick-reference/
+https://guides.github.com/features/mastering-markdown/</description>
+    </item>
+    
+    <item>
+      <title>Task-1 Basic Navigation</title>
+      <link>https://dimidagd.github.io/FRE2019log/posts/task1/</link>
+      <pubDate>Tue, 07 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://dimidagd.github.io/FRE2019log/posts/task1/</guid>
+      <description>What is it about Task-1 description for 2019 at FRE webpage.
+Summary: sweep all lines one after the other and cover as much distance as possible within three minutes.
+List of potential subtasks Inspect last years code Run simple test in lab Run tests outside Optimize turns  Script from 2018 Script1
+Shady parts of code as of now lobst and rosebot params l47:53, what does laser rosebot do inspect how $joyoverride works l:77 setoutput for leds l:79 line 95 is laser initialization?</description>
+    </item>
+    
+    <item>
+      <title>Task-1 Basic Navigation</title>
+      <link>https://dimidagd.github.io/FRE2019log/posts/task2/</link>
+      <pubDate>Tue, 07 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://dimidagd.github.io/FRE2019log/posts/task2/</guid>
+      <description>What is it about Task-1 description for 2019 at FRE webpage.
+Summary: Same as 1, predefined path betweenlines shall be used and plants might be missing. within three minutes.
+List of potential subtasks Inspect last years code Run simple test in lab Run tests outside Optimize turns  Script from 2018 Script1
+Shady parts of code as of now lobst and rosebot params l47:53, what does laser rosebot do inspect how $joyoverride works l:77 setoutput for leds l:79 line 95 is laser initialization?</description>
+    </item>
+    
+    <item>
+      <title>Creating a New Theme?</title>
+      <link>https://dimidagd.github.io/FRE2019log/posts/creating-a-new-theme/</link>
+      <pubDate>Sun, 28 Sep 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://dimidagd.github.io/FRE2019log/posts/creating-a-new-theme/</guid>
+      <description>Introduction This tutorial will show you how to create a simple theme in Hugo. I assume that you are familiar with HTML, the bash command line, and that you are comfortable using Markdown to format content. I&amp;rsquo;ll explain how Hugo uses templates and how you can organize your templates to create a theme. I won&amp;rsquo;t cover using CSS to style your theme.
+We&amp;rsquo;ll start with creating a new site with a very basic template.</description>
+    </item>
+    
+  </channel>
+</rss>

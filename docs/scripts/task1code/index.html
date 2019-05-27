@@ -1,0 +1,643 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>Task-1 script // DTU Field Robot Event 2019</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.55.5" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="DTU" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://dimidagd.github.io/FRE2019log/css/main.min.f90f5edd436ec7b74ad05479a05705770306911f721193e7845948fb07fe1335.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Task-1 script"/>
+<meta name="twitter:description" content="Task 1 2018 script lobst and rosebot params l47:53, what does the laserserver command rosebot do inspect how $joyoverride works l:77 setoutput for leds l:79 line 95 is laser initialization? what is the output at $l9 , l:97 How does rowdrive work l144:168 How turning works l171:190  you are fucked
+  Task1_code  
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198 199 200 201 202 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220 221 222 223 224 225 226 227 228 229 230 231 232 233 234 235 236 237 238 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255 256 257 258 259 260 261 262 263 264 265 266  %%%%%%%%%%%%%%%%%%%%%%% task1 %%%%%%%%%%%%%%%%%%%%%%%% %%%%%%%%%%%%%%%%%%%%% DTUni-Corn %%%%%%%%%%%%%%%%%%%%% %%%%%%%%%%%% constants %%%%%%%%%%%%% %Startturn: -1 = right, 1 = left sign = -1 %turn number of rows-1 turnlim=15 fwdVel = 0."/>
+
+    <meta property="og:title" content="Task-1 script" />
+<meta property="og:description" content="Task 1 2018 script lobst and rosebot params l47:53, what does the laserserver command rosebot do inspect how $joyoverride works l:77 setoutput for leds l:79 line 95 is laser initialization? what is the output at $l9 , l:97 How does rowdrive work l144:168 How turning works l171:190  you are fucked
+  Task1_code  
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198 199 200 201 202 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220 221 222 223 224 225 226 227 228 229 230 231 232 233 234 235 236 237 238 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255 256 257 258 259 260 261 262 263 264 265 266  %%%%%%%%%%%%%%%%%%%%%%% task1 %%%%%%%%%%%%%%%%%%%%%%%% %%%%%%%%%%%%%%%%%%%%% DTUni-Corn %%%%%%%%%%%%%%%%%%%%% %%%%%%%%%%%% constants %%%%%%%%%%%%% %Startturn: -1 = right, 1 = left sign = -1 %turn number of rows-1 turnlim=15 fwdVel = 0." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://dimidagd.github.io/FRE2019log/scripts/task1code/" />
+<meta property="article:published_time" content="2019-05-07T00:00:00&#43;00:00"/>
+<meta property="article:modified_time" content="2019-05-07T00:00:00&#43;00:00"/>
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://dimidagd.github.io/FRE2019log/"><img class="app-header-avatar" src="/FRE2019log/avatar.jpg" alt="DTU" /></a>
+      <h1>DTU Field Robot Event 2019</h1>
+      <p>group</p>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://github.com/gohugoio"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Task-1 script</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          May 7, 2019
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          5 min read
+        </div><div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line>
+</svg>
+          <a class="tag" href="https://dimidagd.github.io/FRE2019log/tags/task-1/">task-1</a></div></div>
+    </header>
+    <div class="post-content">
+      
+
+<h2 id="task-1-2018-script">Task 1 2018 script</h2>
+
+<ul class="task-list">
+<li><label><input type="checkbox" disabled class="task-list-item"> lobst and rosebot params l47:53, what does the laserserver command <code>rosebot</code> do</label></li>
+<li><label><input type="checkbox" disabled class="task-list-item"> inspect how $joyoverride works l:77</label></li>
+<li><label><input type="checkbox" disabled class="task-list-item"> setoutput for leds  l:79</label></li>
+<li><label><input type="checkbox" disabled class="task-list-item"> line 95 is laser initialization?</label></li>
+<li><label><input type="checkbox" disabled class="task-list-item"> what is the output at $l9 , l:97</label></li>
+<li><label><input type="checkbox" disabled class="task-list-item"> How does rowdrive work l144:168</label></li>
+<li><label><input type="checkbox" disabled class="task-list-item"> How turning works l171:190</label></li>
+</ul>
+
+<p>you are fucked</p>
+
+<p><details>
+<summary>
+Task1_code
+</summary>
+<p></p>
+
+<p><div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 35
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 36
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 37
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 38
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 39
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 40
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 41
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 42
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 43
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 44
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 45
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 46
+</span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 47
+</span></span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 48
+</span></span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 49
+</span></span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 50
+</span></span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 51
+</span></span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 52
+</span></span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 53
+</span></span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 54
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 55
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 56
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 57
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 58
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 59
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 60
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 61
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 62
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 63
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 64
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 65
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 66
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 67
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 68
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 69
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 70
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 71
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 72
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 73
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 74
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 75
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 76
+</span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 77
+</span></span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 78
+</span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 79
+</span></span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 80
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 81
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 82
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 83
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 84
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 85
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 86
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 87
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 88
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 89
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 90
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 91
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 92
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 93
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 94
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 95
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 96
+</span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 97
+</span></span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 98
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 99
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">100
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">101
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">102
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">103
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">104
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">105
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">106
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">107
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">108
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">109
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">110
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">111
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">112
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">113
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">114
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">115
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">116
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">117
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">118
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">119
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">120
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">121
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">122
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">123
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">124
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">125
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">126
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">127
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">128
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">129
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">130
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">131
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">132
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">133
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">134
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">135
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">136
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">137
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">138
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">139
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">140
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">141
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">142
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">143
+</span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">144
+</span></span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">145
+</span></span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">146
+</span></span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">147
+</span></span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">148
+</span></span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">149
+</span></span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">150
+</span></span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">151
+</span></span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">152
+</span></span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">153
+</span></span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">154
+</span></span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">155
+</span></span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">156
+</span></span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">157
+</span></span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">158
+</span></span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">159
+</span></span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">160
+</span></span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">161
+</span></span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">162
+</span></span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">163
+</span></span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">164
+</span></span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">165
+</span></span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">166
+</span></span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">167
+</span></span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">168
+</span></span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">169
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">170
+</span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">171
+</span></span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">172
+</span></span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">173
+</span></span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">174
+</span></span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">175
+</span></span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">176
+</span></span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">177
+</span></span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">178
+</span></span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">179
+</span></span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">180
+</span></span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">181
+</span></span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">182
+</span></span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">183
+</span></span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">184
+</span></span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">185
+</span></span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">186
+</span></span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">187
+</span></span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">188
+</span></span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">189
+</span></span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">190
+</span></span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">191
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">192
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">193
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">194
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">195
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">196
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">197
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">198
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">199
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">200
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">201
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">202
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">203
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">204
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">205
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">206
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">207
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">208
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">209
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">210
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">211
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">212
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">213
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">214
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">215
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">216
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">217
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">218
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">219
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">220
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">221
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">222
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">223
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">224
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">225
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">226
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">227
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">228
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">229
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">230
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">231
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">232
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">233
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">234
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">235
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">236
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">237
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">238
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">239
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">240
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">241
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">242
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">243
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">244
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">245
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">246
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">247
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">248
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">249
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">250
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">251
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">252
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">253
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">254
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">255
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">256
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">257
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">258
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">259
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">260
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">261
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">262
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">263
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">264
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">265
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">266
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">%%%%%%%%%%%%%%%%%%%%%%%</span> <span style="color:#a6e22e">task1</span> <span style="color:#f92672">%%%%%%%%%%%%%%%%%%%%%%%%</span>
+<span style="color:#f92672">%%%%%%%%%%%%%%%%%%%%%</span> <span style="color:#a6e22e">DTUni</span><span style="color:#f92672">-</span><span style="color:#a6e22e">Corn</span> <span style="color:#f92672">%%%%%%%%%%%%%%%%%%%%%</span>
+
+
+<span style="color:#f92672">%%%%%%%%%%%%</span> <span style="color:#a6e22e">constants</span> <span style="color:#f92672">%%%%%%%%%%%%%</span>
+<span style="color:#f92672">%</span><span style="color:#a6e22e">Startturn</span>: <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> = <span style="color:#a6e22e">right</span>, <span style="color:#ae81ff">1</span> = <span style="color:#a6e22e">left</span>
+<span style="color:#a6e22e">sign</span> = <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>
+
+<span style="color:#f92672">%</span><span style="color:#a6e22e">turn</span> <span style="color:#a6e22e">number</span> <span style="color:#a6e22e">of</span> <span style="color:#a6e22e">rows</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>
+<span style="color:#a6e22e">turnlim</span>=<span style="color:#ae81ff">15</span>
+
+<span style="color:#a6e22e">fwdVel</span> = <span style="color:#ae81ff">0.7</span>
+<span style="color:#a6e22e">bckVel</span> = <span style="color:#f92672">-</span><span style="color:#ae81ff">0.5</span>
+<span style="color:#a6e22e">slowVel</span>= <span style="color:#ae81ff">0.6</span>
+<span style="color:#a6e22e">turnVel</span> = <span style="color:#ae81ff">0.7</span>
+
+<span style="color:#a6e22e">fwdLaser</span> = <span style="color:#ae81ff">1</span>
+<span style="color:#a6e22e">bckLaser</span> = <span style="color:#ae81ff">0</span>
+
+<span style="color:#a6e22e">fwdLasX</span> = <span style="color:#ae81ff">0.46</span>
+<span style="color:#a6e22e">bckLasX</span> = <span style="color:#f92672">-</span><span style="color:#ae81ff">0.17</span>
+
+<span style="color:#a6e22e">slowdist</span>= <span style="color:#ae81ff">11</span>
+
+<span style="color:#a6e22e">pi</span>=<span style="color:#ae81ff">3.141592</span>
+
+
+<span style="color:#f92672">%%%%%%%%%%%%</span> <span style="color:#a6e22e">variables</span> <span style="color:#f92672">%%%%%%%%%%%%%</span>
+<span style="color:#a6e22e">id</span>= <span style="color:#ae81ff">0</span>
+<span style="color:#a6e22e">turncnt</span>= <span style="color:#ae81ff">1</span>
+<span style="color:#a6e22e">rowStartX</span> = <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">odox</span>
+<span style="color:#a6e22e">rowStartY</span> = <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">odoy</span>
+<span style="color:#a6e22e">turnfinishedX</span> = <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">odox</span>
+
+<span style="color:#a6e22e">Vel</span> = <span style="color:#a6e22e">fwdVel</span>
+<span style="color:#a6e22e">Las</span> = <span style="color:#a6e22e">fwdLaser</span>
+<span style="color:#a6e22e">lasX</span> = <span style="color:#a6e22e">fwdLasX</span>
+
+<span style="color:#a6e22e">x</span>=<span style="color:#ae81ff">0</span>
+<span style="color:#a6e22e">y</span>=<span style="color:#ae81ff">0</span>
+<span style="color:#a6e22e">th</span>=<span style="color:#ae81ff">0</span>
+
+
+<span style="color:#f92672">%%%%%%%%%%%%</span> <span style="color:#a6e22e">plugin</span> <span style="color:#a6e22e">variables</span> <span style="color:#f92672">%%%%%%%%%%%%%</span>
+<span style="color:#a6e22e">set</span> <span style="color:#e6db74">&#34;$odoth&#34;</span> <span style="color:#ae81ff">0</span>
+
+<span style="display:block;width:100%;background-color:#3c3d38"><span style="color:#a6e22e">laser</span> <span style="color:#e6db74">&#34;var lobst.minPointsInLine=8&#34;</span>
+</span><span style="display:block;width:100%;background-color:#3c3d38"><span style="color:#a6e22e">laser</span> <span style="color:#e6db74">&#34;var lobst.enableSplit=true&#34;</span>
+</span><span style="display:block;width:100%;background-color:#3c3d38"><span style="color:#a6e22e">laser</span> <span style="color:#e6db74">&#34;var lobst.minsplitcnt=2&#34;</span>
+</span><span style="display:block;width:100%;background-color:#3c3d38"><span style="color:#a6e22e">laser</span> <span style="color:#e6db74">&#34;var lobst.splitdist=0.5&#34;</span>
+</span><span style="display:block;width:100%;background-color:#3c3d38"><span style="color:#a6e22e">laser</span> <span style="color:#e6db74">&#34;var rosebot.lineAngleInterval=&#39;-105,-75&#39;&#34;</span>
+</span><span style="display:block;width:100%;background-color:#3c3d38"><span style="color:#a6e22e">laser</span> <span style="color:#e6db74">&#34;var rosebot.lineRmax=1.0&#34;</span>
+</span><span style="display:block;width:100%;background-color:#3c3d38"><span style="color:#a6e22e">laser</span> <span style="color:#e6db74">&#34;var rosebot.holeAngleAllowed=180&#34;</span>
+</span>
+<span style="color:#a6e22e">wait</span> <span style="color:#ae81ff">1</span>
+
+
+<span style="color:#f92672">%%%%%%%%%%%%</span> <span style="color:#a6e22e">holetypes</span> <span style="color:#f92672">%%%%%%%%%%%%%</span>
+<span style="color:#f92672">%</span> <span style="color:#ae81ff">0</span> = <span style="color:#a6e22e">dead</span> <span style="color:#a6e22e">end</span>
+<span style="color:#f92672">%</span> <span style="color:#ae81ff">1</span> = <span style="color:#a6e22e">free</span> <span style="color:#a6e22e">space</span>
+<span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> = <span style="color:#a6e22e">right</span> <span style="color:#a6e22e">wall</span>
+<span style="color:#f92672">%</span> <span style="color:#ae81ff">3</span> = <span style="color:#a6e22e">left</span> <span style="color:#a6e22e">wall</span>
+<span style="color:#f92672">%</span> <span style="color:#ae81ff">4</span> = <span style="color:#a6e22e">hole</span>
+<span style="color:#f92672">%</span> <span style="color:#ae81ff">5</span> = <span style="color:#a6e22e">ignore</span> <span style="color:#a6e22e">hole</span>
+
+
+<span style="color:#f92672">%%%%%%%%%%%%</span> <span style="color:#a6e22e">start</span> <span style="color:#a6e22e">logging</span> <span style="color:#f92672">%%%%%%%%%%%%%</span>
+<span style="color:#a6e22e">log</span> <span style="color:#e6db74">&#34;$time&#34;</span> <span style="color:#e6db74">&#34;$odox&#34;</span> <span style="color:#e6db74">&#34;$odoy&#34;</span> <span style="color:#e6db74">&#34;$odoth&#34;</span> <span style="color:#e6db74">&#34;x&#34;</span> <span style="color:#e6db74">&#34;y&#34;</span> <span style="color:#e6db74">&#34;th&#34;</span> <span style="color:#f92672">%</span><span style="color:#e6db74">&#34;$l4&#34;</span> <span style="color:#e6db74">&#34;$l5&#34;</span> <span style="color:#e6db74">&#34;$l6&#34;</span> <span style="color:#e6db74">&#34;$l7&#34;</span>
+<span style="color:#a6e22e">laser</span> <span style="color:#e6db74">&#34;scanset logopen&#34;</span>
+<span style="color:#a6e22e">laser</span> <span style="color:#e6db74">&#34;scanset log=1&#34;</span>
+<span style="color:#a6e22e">laser</span> <span style="color:#e6db74">&#34;odopose log=true&#34;</span>
+
+
+<span style="color:#f92672">%%%%%%%%%%%%%%%%%%</span><span style="color:#a6e22e">ini</span>
+<span style="color:#a6e22e">label</span> <span style="color:#e6db74">&#34;ini&#34;</span>
+<span style="color:#a6e22e">wait</span> <span style="color:#ae81ff">1</span>
+<span style="display:block;width:100%;background-color:#3c3d38"><span style="color:#a6e22e">eval</span> <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">joyoverride</span>
+</span><span style="color:#a6e22e">backbut</span> = <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">joyoverride</span>
+<span style="display:block;width:100%;background-color:#3c3d38"><span style="color:#a6e22e">setoutput</span> <span style="color:#e6db74">&#34;ledMode&#34;</span> <span style="color:#ae81ff">32</span>
+</span><span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">backbut</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) <span style="color:#e6db74">&#34;ini&#34;</span>
+
+
+<span style="color:#a6e22e">fwd</span> <span style="color:#ae81ff">0.4</span> <span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">v</span> <span style="color:#ae81ff">0.6</span> :(<span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">cmdtime</span>&gt; <span style="color:#ae81ff">25</span>)
+
+<span style="color:#f92672">%%%%%%%%%%%%</span> <span style="color:#a6e22e">start</span> <span style="color:#f92672">%%%%%%%%%%%%%</span>
+<span style="color:#a6e22e">label</span> <span style="color:#e6db74">&#34;start&#34;</span>
+<span style="color:#a6e22e">setoutput</span> <span style="color:#e6db74">&#34;ledMode&#34;</span> <span style="color:#ae81ff">0</span>
+
+<span style="color:#a6e22e">eval</span> <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">joyoverride</span>
+<span style="color:#a6e22e">backbut</span> = <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">joyoverride</span>
+<span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">backbut</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) <span style="color:#e6db74">&#34;ini&#34;</span>
+
+<span style="color:#a6e22e">laser</span> <span style="color:#e6db74">&#34;rosebot&#34;</span>
+<span style="color:#a6e22e">id</span> = <span style="color:#a6e22e">id</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+<span style="color:#a6e22e">stringcat</span> <span style="color:#e6db74">&#34;rosebot device=&#34;</span><span style="color:#a6e22e">Las</span><span style="color:#e6db74">&#34; laserx=&#34;</span><span style="color:#a6e22e">lasX</span><span style="color:#e6db74">&#34; id=&#34;</span><span style="color:#a6e22e">id</span><span style="color:#e6db74">&#34; backward=0&#34;</span>
+<span style="color:#a6e22e">laser</span> <span style="color:#e6db74">&#34;$string&#34;</span>
+<span style="display:block;width:100%;background-color:#3c3d38"><span style="color:#a6e22e">wait</span> <span style="color:#ae81ff">1</span> :(<span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">l9</span><span style="color:#f92672">==</span><span style="color:#a6e22e">id</span>)
+</span>
+<span style="color:#f92672">%</span><span style="color:#a6e22e">printing</span> <span style="color:#a6e22e">returned</span> <span style="color:#a6e22e">values</span>
+<span style="color:#a6e22e">eval</span> <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">l1</span>
+<span style="color:#a6e22e">eval</span> <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">l2</span>
+<span style="color:#a6e22e">eval</span> <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">l3</span>
+<span style="color:#a6e22e">eval</span> <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">l4</span>
+<span style="color:#a6e22e">eval</span> <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">l5</span>
+<span style="color:#a6e22e">eval</span> <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">l6</span>
+<span style="color:#a6e22e">eval</span> <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">l7</span>
+<span style="color:#a6e22e">eval</span> <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">l8</span>
+<span style="color:#a6e22e">eval</span> <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">l9</span>
+<span style="color:#a6e22e">eval</span> <span style="color:#a6e22e">id</span>
+
+<span style="color:#f92672">%</span><span style="color:#66d9ef">if</span> (<span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">l4</span>&lt;<span style="color:#ae81ff">0</span>) <span style="color:#e6db74">&#34;start&#34;</span>
+
+<span style="color:#a6e22e">x</span>=<span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">l4</span>
+<span style="color:#a6e22e">y</span>=<span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">l5</span>
+<span style="color:#a6e22e">th</span>=<span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">l6</span>
+<span style="color:#a6e22e">holetype</span> = <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">l7</span>
+<span style="color:#a6e22e">eval</span> <span style="color:#a6e22e">holetype</span>
+<span style="color:#a6e22e">eval</span> <span style="color:#a6e22e">x</span>
+<span style="color:#a6e22e">eval</span> <span style="color:#a6e22e">y</span>
+<span style="color:#a6e22e">eval</span> <span style="color:#a6e22e">th</span>
+
+<span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">holetype</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) <span style="color:#e6db74">&#34;start&#34;</span> <span style="color:#f92672">%</span><span style="color:#66d9ef">if</span> <span style="color:#a6e22e">meeting</span> <span style="color:#a6e22e">dead</span> <span style="color:#a6e22e">end</span>
+
+<span style="color:#f92672">%</span><span style="color:#a6e22e">decide</span> <span style="color:#a6e22e">which</span> <span style="color:#a6e22e">mode</span> <span style="color:#a6e22e">to</span> <span style="color:#a6e22e">enter</span>
+<span style="color:#66d9ef">switch</span>(<span style="color:#a6e22e">holetype</span>)
+<span style="color:#66d9ef">case</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">%</span><span style="color:#a6e22e">free</span> <span style="color:#a6e22e">space</span>
+	<span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">turncnt</span>&gt;<span style="color:#a6e22e">turnlim</span>) <span style="color:#e6db74">&#34;end&#34;</span>
+	<span style="color:#a6e22e">eval</span> <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">odox</span>
+	<span style="color:#f92672">%</span><span style="color:#66d9ef">if</span>(<span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">odox</span> <span style="color:#f92672">-</span> <span style="color:#a6e22e">turnfinishedX</span> &lt; <span style="color:#ae81ff">2</span>) <span style="color:#e6db74">&#34;rowdrive&#34;</span>
+	<span style="color:#66d9ef">goto</span> <span style="color:#e6db74">&#34;turn&#34;</span>
+<span style="color:#66d9ef">case</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">%</span><span style="color:#a6e22e">right_wall</span>
+	<span style="color:#66d9ef">goto</span> <span style="color:#e6db74">&#34;rowdrive&#34;</span>
+<span style="color:#66d9ef">case</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">%</span><span style="color:#a6e22e">left_wall</span>
+	<span style="color:#66d9ef">goto</span> <span style="color:#e6db74">&#34;rowdrive&#34;</span>
+<span style="color:#66d9ef">case</span> <span style="color:#ae81ff">4</span> <span style="color:#f92672">%</span><span style="color:#a6e22e">hole</span>
+	<span style="color:#66d9ef">goto</span> <span style="color:#e6db74">&#34;rowdrive&#34;</span>
+<span style="color:#66d9ef">case</span> <span style="color:#ae81ff">5</span> <span style="color:#f92672">%</span><span style="color:#a6e22e">ignore</span> <span style="color:#a6e22e">hole</span>
+	<span style="color:#66d9ef">goto</span> <span style="color:#e6db74">&#34;rowdrive&#34;</span>
+<span style="color:#a6e22e">endswitch</span>
+
+<span style="color:#66d9ef">goto</span> <span style="color:#e6db74">&#34;start&#34;</span>
+
+
+<span style="display:block;width:100%;background-color:#3c3d38"><span style="color:#f92672">%%%%%%%%%%%%</span> <span style="color:#a6e22e">rowdrive</span> <span style="color:#f92672">%%%%%%%%%%%%%</span>
+</span><span style="display:block;width:100%;background-color:#3c3d38"><span style="color:#a6e22e">label</span> <span style="color:#e6db74">&#34;rowdrive&#34;</span>
+</span><span style="display:block;width:100%;background-color:#3c3d38"><span style="color:#a6e22e">laser</span> <span style="color:#e6db74">&#34;rosebot&#34;</span>
+</span><span style="display:block;width:100%;background-color:#3c3d38"><span style="color:#a6e22e">xo</span> = <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">odox</span><span style="color:#f92672">-</span><span style="color:#a6e22e">rowStartX</span>
+</span><span style="display:block;width:100%;background-color:#3c3d38"><span style="color:#a6e22e">yo</span> = <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">odoy</span><span style="color:#f92672">-</span><span style="color:#a6e22e">rowStartY</span>
+</span><span style="display:block;width:100%;background-color:#3c3d38"><span style="color:#a6e22e">disto</span> = <span style="color:#a6e22e">sqrt</span>(<span style="color:#a6e22e">xo</span><span style="color:#f92672">*</span><span style="color:#a6e22e">xo</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">yo</span><span style="color:#f92672">*</span><span style="color:#a6e22e">yo</span>)
+</span><span style="display:block;width:100%;background-color:#3c3d38"><span style="color:#a6e22e">eval</span> <span style="color:#a6e22e">xo</span>
+</span><span style="display:block;width:100%;background-color:#3c3d38"><span style="color:#a6e22e">eval</span> <span style="color:#a6e22e">yo</span>
+</span><span style="display:block;width:100%;background-color:#3c3d38"><span style="color:#a6e22e">eval</span> <span style="color:#a6e22e">disto</span>
+</span><span style="display:block;width:100%;background-color:#3c3d38"><span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">disto</span>&gt;<span style="color:#a6e22e">slowdist</span>) <span style="color:#e6db74">&#34;speedcontrol&#34;</span>
+</span><span style="display:block;width:100%;background-color:#3c3d38">
+</span><span style="display:block;width:100%;background-color:#3c3d38"><span style="color:#a6e22e">eval</span> <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">joyoverride</span>
+</span><span style="display:block;width:100%;background-color:#3c3d38"><span style="color:#a6e22e">backbut</span> = <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">joyoverride</span>
+</span><span style="display:block;width:100%;background-color:#3c3d38"><span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">backbut</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) <span style="color:#e6db74">&#34;ini&#34;</span>
+</span><span style="display:block;width:100%;background-color:#3c3d38">
+</span><span style="display:block;width:100%;background-color:#3c3d38"><span style="color:#a6e22e">label</span> <span style="color:#e6db74">&#34;driveon&#34;</span>
+</span><span style="display:block;width:100%;background-color:#3c3d38"><span style="color:#a6e22e">setoutput</span> <span style="color:#e6db74">&#34;ledMode&#34;</span> <span style="color:#ae81ff">0</span>
+</span><span style="display:block;width:100%;background-color:#3c3d38"><span style="color:#a6e22e">laser</span> <span style="color:#e6db74">&#34;rosebot&#34;</span>
+</span><span style="display:block;width:100%;background-color:#3c3d38"><span style="color:#a6e22e">driveon</span> <span style="color:#a6e22e">x</span> <span style="color:#a6e22e">y</span> <span style="color:#a6e22e">th</span> <span style="color:#e6db74">&#34;rad&#34;</span> <span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">v</span> <span style="color:#a6e22e">Vel</span> :(<span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">drivendist</span>&gt;<span style="color:#ae81ff">0.03</span>)
+</span><span style="display:block;width:100%;background-color:#3c3d38"><span style="color:#66d9ef">goto</span> <span style="color:#e6db74">&#34;start&#34;</span>
+</span><span style="display:block;width:100%;background-color:#3c3d38">
+</span><span style="display:block;width:100%;background-color:#3c3d38"><span style="color:#a6e22e">label</span> <span style="color:#e6db74">&#34;speedcontrol&#34;</span>
+</span><span style="display:block;width:100%;background-color:#3c3d38"><span style="color:#a6e22e">laser</span> <span style="color:#e6db74">&#34;rosebot&#34;</span>
+</span><span style="display:block;width:100%;background-color:#3c3d38"><span style="color:#a6e22e">Vel</span> = <span style="color:#a6e22e">slowVel</span>
+</span><span style="display:block;width:100%;background-color:#3c3d38"><span style="color:#66d9ef">goto</span> <span style="color:#e6db74">&#34;driveon&#34;</span>
+</span>
+
+<span style="display:block;width:100%;background-color:#3c3d38"><span style="color:#f92672">%%%%%%%%%%%%</span> <span style="color:#a6e22e">turn</span> <span style="color:#f92672">%%%%%%%%%%%%%</span>
+</span><span style="display:block;width:100%;background-color:#3c3d38"><span style="color:#a6e22e">label</span> <span style="color:#e6db74">&#34;turn&#34;</span>
+</span><span style="display:block;width:100%;background-color:#3c3d38"><span style="color:#a6e22e">laser</span> <span style="color:#e6db74">&#34;rosebot&#34;</span>
+</span><span style="display:block;width:100%;background-color:#3c3d38"><span style="color:#a6e22e">Vel</span> = <span style="color:#a6e22e">turnVel</span>
+</span><span style="display:block;width:100%;background-color:#3c3d38"><span style="color:#a6e22e">fwd</span> <span style="color:#ae81ff">0.4</span> <span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">v</span> <span style="color:#ae81ff">0.8</span> :(<span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">cmdtime</span> &gt; <span style="color:#ae81ff">10</span>)
+</span><span style="display:block;width:100%;background-color:#3c3d38"><span style="color:#a6e22e">stop</span>
+</span><span style="display:block;width:100%;background-color:#3c3d38">
+</span><span style="display:block;width:100%;background-color:#3c3d38"><span style="color:#a6e22e">eval</span> <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">joyoverride</span>
+</span><span style="display:block;width:100%;background-color:#3c3d38"><span style="color:#a6e22e">backbut</span> = <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">joyoverride</span>
+</span><span style="display:block;width:100%;background-color:#3c3d38"><span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">backbut</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) <span style="color:#e6db74">&#34;ini&#34;</span>
+</span><span style="display:block;width:100%;background-color:#3c3d38">
+</span><span style="display:block;width:100%;background-color:#3c3d38"><span style="color:#f92672">%</span><span style="color:#a6e22e">turn90</span> = <span style="color:#a6e22e">sign</span><span style="color:#f92672">*</span><span style="color:#ae81ff">150</span>
+</span><span style="display:block;width:100%;background-color:#3c3d38"><span style="color:#f92672">%</span><span style="color:#a6e22e">turnV</span> = <span style="color:#a6e22e">sign</span><span style="color:#f92672">*</span>(<span style="color:#ae81ff">168</span><span style="color:#f92672">-</span><span style="color:#ae81ff">150</span>)
+</span><span style="display:block;width:100%;background-color:#3c3d38">
+</span><span style="display:block;width:100%;background-color:#3c3d38"><span style="color:#a6e22e">odoDist</span> = <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">ododist</span>
+</span><span style="display:block;width:100%;background-color:#3c3d38"><span style="color:#f92672">%</span><span style="color:#a6e22e">turnr</span> <span style="color:#ae81ff">0.53</span> <span style="color:#a6e22e">turn90</span> <span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">v</span> <span style="color:#a6e22e">Vel</span>
+</span><span style="display:block;width:100%;background-color:#3c3d38"><span style="color:#f92672">%</span><span style="color:#a6e22e">turnr</span> <span style="color:#ae81ff">0.53</span> <span style="color:#a6e22e">turnV</span> <span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">v</span> <span style="color:#a6e22e">Vel</span> : (<span style="color:#ae81ff">1</span>)
+</span><span style="display:block;width:100%;background-color:#3c3d38">
+</span><span style="display:block;width:100%;background-color:#3c3d38"><span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">sign</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) <span style="color:#e6db74">&#34;labell&#34;</span>
+</span><span style="display:block;width:100%;background-color:#3c3d38"><span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">sign</span> <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#e6db74">&#34;labelr&#34;</span>
+</span>
+
+
+<span style="color:#f92672">%%%%%</span> <span style="color:#a6e22e">turnr</span> <span style="color:#a6e22e">led</span>
+<span style="color:#a6e22e">label</span> <span style="color:#e6db74">&#34;labelr&#34;</span>
+<span style="color:#a6e22e">setoutput</span> <span style="color:#e6db74">&#34;ledMode&#34;</span> <span style="color:#ae81ff">4</span>
+<span style="color:#66d9ef">goto</span> <span style="color:#e6db74">&#34;postLed&#34;</span>
+
+<span style="color:#f92672">%%%%%</span> <span style="color:#a6e22e">turnl</span> <span style="color:#a6e22e">led</span>
+<span style="color:#a6e22e">label</span> <span style="color:#e6db74">&#34;labell&#34;</span>
+<span style="color:#a6e22e">setoutput</span> <span style="color:#e6db74">&#34;ledMode&#34;</span> <span style="color:#ae81ff">2</span>
+
+
+<span style="color:#a6e22e">label</span> <span style="color:#e6db74">&#34;postLed&#34;</span>
+
+<span style="color:#a6e22e">turnang</span> = <span style="color:#a6e22e">sign</span><span style="color:#f92672">*</span><span style="color:#ae81ff">180</span>
+<span style="color:#a6e22e">turnr</span> <span style="color:#ae81ff">0.35</span> <span style="color:#a6e22e">turnang</span> <span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">v</span> <span style="color:#a6e22e">Vel</span>
+<span style="color:#a6e22e">turnfinishedX</span> = <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">odox</span>
+<span style="color:#f92672">%</span><span style="color:#a6e22e">Turn</span> <span style="color:#a6e22e">variables</span>
+<span style="color:#a6e22e">turncnt</span>=<span style="color:#a6e22e">turncnt</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>
+<span style="color:#a6e22e">sign</span> = <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#f92672">*</span><span style="color:#a6e22e">sign</span>
+<span style="color:#f92672">%</span><span style="color:#a6e22e">Turn</span> <span style="color:#a6e22e">loop</span>
+<span style="color:#a6e22e">label</span> <span style="color:#e6db74">&#34;turnR&#34;</span>
+<span style="color:#a6e22e">laser</span> <span style="color:#e6db74">&#34;rosebot&#34;</span>
+<span style="color:#a6e22e">id</span> = <span style="color:#a6e22e">id</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+<span style="color:#a6e22e">stringcat</span> <span style="color:#e6db74">&#34;rosebot device=&#34;</span><span style="color:#a6e22e">Las</span><span style="color:#e6db74">&#34; laserx=&#34;</span><span style="color:#a6e22e">lasX</span><span style="color:#e6db74">&#34; id=&#34;</span><span style="color:#a6e22e">id</span><span style="color:#e6db74">&#34; backward=0&#34;</span>
+<span style="color:#a6e22e">laser</span> <span style="color:#e6db74">&#34;$string&#34;</span>
+<span style="color:#a6e22e">wait</span> <span style="color:#ae81ff">1</span> :(<span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">l9</span><span style="color:#f92672">==</span><span style="color:#a6e22e">id</span>)
+
+<span style="color:#f92672">%</span><span style="color:#a6e22e">Check</span> <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">hole</span> <span style="color:#a6e22e">or</span> <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">the</span> <span style="color:#a6e22e">robot</span> <span style="color:#a6e22e">has</span> <span style="color:#a6e22e">turned</span> <span style="color:#ae81ff">180</span>
+<span style="color:#66d9ef">if</span>(<span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">l7</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">4</span>) <span style="color:#e6db74">&#34;stopR&#34;</span>
+<span style="color:#66d9ef">if</span>(<span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">ododist</span> &lt; <span style="color:#a6e22e">odoDist</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)  <span style="color:#e6db74">&#34;turnR&#34;</span>
+<span style="color:#a6e22e">stop</span>
+<span style="color:#a6e22e">wait</span> <span style="color:#ae81ff">2</span>
+<span style="color:#a6e22e">setoutput</span> <span style="color:#e6db74">&#34;ledMode&#34;</span> <span style="color:#ae81ff">0</span>
+<span style="color:#a6e22e">fwd</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">0.1</span> <span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">v0</span><span style="color:#ae81ff">.3</span> :(<span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">cmdtime</span> &gt; <span style="color:#ae81ff">10</span>)
+
+<span style="color:#a6e22e">eval</span> <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">joyoverride</span>
+<span style="color:#a6e22e">backbut</span> = <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">joyoverride</span>
+<span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">backbut</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) <span style="color:#e6db74">&#34;ini&#34;</span>
+
+<span style="color:#66d9ef">goto</span> <span style="color:#e6db74">&#34;turnR&#34;</span>
+
+<span style="color:#f92672">%</span><span style="color:#a6e22e">Hole</span> <span style="color:#a6e22e">found</span>
+<span style="color:#a6e22e">label</span> <span style="color:#e6db74">&#34;stopR&#34;</span>
+<span style="color:#a6e22e">laser</span> <span style="color:#e6db74">&#34;rosebot&#34;</span>
+<span style="color:#a6e22e">eval</span> <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">l7</span>
+<span style="color:#a6e22e">eval</span> <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">odoth</span>
+<span style="color:#a6e22e">stop</span>
+
+
+
+<span style="color:#f92672">%</span><span style="color:#a6e22e">Set</span> <span style="color:#a6e22e">values</span> <span style="color:#a6e22e">to</span> <span style="color:#66d9ef">default</span>
+<span style="color:#a6e22e">rowStartX</span> = <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">odox</span>
+<span style="color:#a6e22e">rowStartY</span> = <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">odoy</span>
+<span style="color:#a6e22e">Vel</span> = <span style="color:#a6e22e">fwdVel</span>
+<span style="color:#66d9ef">goto</span> <span style="color:#e6db74">&#34;start&#34;</span>
+
+
+<span style="color:#f92672">%%%%%%%%%%%%</span> <span style="color:#a6e22e">end</span> <span style="color:#f92672">%%%%%%%%%%%%%</span>
+<span style="color:#a6e22e">label</span> <span style="color:#e6db74">&#34;end&#34;</span>
+<span style="color:#a6e22e">setoutput</span> <span style="color:#e6db74">&#34;ledMode&#34;</span> <span style="color:#ae81ff">16</span>
+<span style="color:#a6e22e">play</span> <span style="color:#e6db74">&#34;bender.wav&#34;</span>
+<span style="color:#a6e22e">fwd</span> <span style="color:#ae81ff">0</span>
+<span style="color:#a6e22e">wait</span> <span style="color:#ae81ff">25</span>
+<span style="color:#a6e22e">setoutput</span> <span style="color:#e6db74">&#34;ledMode&#34;</span> <span style="color:#ae81ff">0</span>
+<span style="color:#a6e22e">stop</span>
+<span style="color:#f92672">%</span><span style="color:#a6e22e">stop</span> <span style="color:#a6e22e">logging</span>
+<span style="color:#a6e22e">eval</span> <span style="color:#a6e22e">rowStartX</span>
+<span style="color:#a6e22e">eval</span> <span style="color:#a6e22e">rowStartY</span>
+<span style="color:#a6e22e">eval</span> <span style="color:#a6e22e">xo</span>
+<span style="color:#a6e22e">eval</span> <span style="color:#a6e22e">yo</span>
+<span style="color:#a6e22e">eval</span> <span style="color:#a6e22e">disto</span>
+
+<span style="color:#a6e22e">laser</span> <span style="color:#e6db74">&#34;scanset logclose&#34;</span>
+<span style="color:#a6e22e">laser</span> <span style="color:#e6db74">&#34;odopose log=false&#34;</span></code></pre></td></tr></table>
+</div>
+</div>
+</p>
+<!--
+--></p>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

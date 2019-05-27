@@ -1,0 +1,14 @@
+baseURL = "https://dimidagd.github.io/FRE2019log/"
+languageCode = "en-us"
+title = "DTU Field Robot Event 2019"
+theme = "m10c"
+paginate = 10
+publishDir = "docs"
+[params]
+
+  author = "DTU"
+  description = "group"
+  avatar = "DTU.png"
+  [[params.social]]
+    name = "github"
+    url = "https://github.com/gohugoio"

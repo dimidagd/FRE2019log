@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on DTU Field Robot Event 2019</title>
+    <link>https://dimidagd.github.io/FRE2019log/tags/</link>
+    <description>Recent content in Tags on DTU Field Robot Event 2019</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 07 May 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://dimidagd.github.io/FRE2019log/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>MD</title>
+      <link>https://dimidagd.github.io/FRE2019log/tags/md/</link>
+      <pubDate>Tue, 07 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://dimidagd.github.io/FRE2019log/tags/md/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>task-1</title>
+      <link>https://dimidagd.github.io/FRE2019log/tags/task-1/</link>
+      <pubDate>Tue, 07 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://dimidagd.github.io/FRE2019log/tags/task-1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>hugo</title>
+      <link>https://dimidagd.github.io/FRE2019log/tags/hugo/</link>
+      <pubDate>Sun, 28 Sep 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://dimidagd.github.io/FRE2019log/tags/hugo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>themes</title>
+      <link>https://dimidagd.github.io/FRE2019log/tags/themes/</link>
+      <pubDate>Sun, 28 Sep 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://dimidagd.github.io/FRE2019log/tags/themes/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
